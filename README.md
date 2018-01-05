@@ -15,9 +15,9 @@
 
 
 # support OS： 
-##  Windows，Android，IOS，
- OSX，Linux（ubuntu，centos ...,etc）只要可以使用浏览器。
- ##  可以离线或者在线使用
+##  Windows，Android，IOS，OSX，Linux（ubuntu，centos，...,etc）
+## 基于HTML5 只要可以使用浏览器。
+##  可以离线或者在线使用
   
   ###  该项目采用MIT License，开源形式供大家学习使用
 
