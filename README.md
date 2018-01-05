@@ -12,12 +12,14 @@
 # 运行方式 
 浏览器打开main.html即可
 
-###  该项目采用MIT License，开源形式供大家学习使用
+
 
 # support OS： 
- Windows，Android，IOS，
+##  Windows，Android，IOS，
  OSX，Linux（ubuntu，centos ...,etc）只要可以使用浏览器。
-  可以离线或者在线使用
+ ##  可以离线或者在线使用
+  
+  ###  该项目采用MIT License，开源形式供大家学习使用
 
 # 识别效果展示：
 
