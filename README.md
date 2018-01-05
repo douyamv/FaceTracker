@@ -1,6 +1,4 @@
----
-typora-root-url: ./result/faceTracker.jpg
----
+ 
 
 #  FaceTracker
 ## feature 
@@ -18,7 +16,8 @@ typora-root-url: ./result/faceTracker.jpg
 
 # support OS： 
  Windows，Android，IOS，
- OSX，Linux（ubuntu，centos ...,etc）
+ OSX，Linux（ubuntu，centos ...,etc）只要可以使用浏览器。
+  可以离线或者在线使用
 
 # 识别效果展示：
 
