@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://test.huweitong.com/demos/Video_onebyone_android.html?ip=swowt9s1512722879643&name_string= -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+     <link rel="stylesheet" href="./safari_files/style.css">
+
+    <title>Audio+Video+TextChat+FileSharing using RTCMultiConnection</title>
+    <meta name="description" content="Share audio, video along with text chat and filesharing using RTCMultiConnection">
+    <meta name="keywords" content="WebRTC,RTCMultiConnection,Demos,Experiments,Samples,Examples">
+    <script src="./safari_files/jquery.min.js"></script>
+     <link rel="stylesheet" href="./safari_files/bootstrap.min.css">
+    	<link rel="stylesheet" href="./safari_files/getMediaElement.css">
+    	
+        <link rel="stylesheet" href="./safari_files/style.min.css">
+        <link rel="stylesheet" href="./safari_files/font-awesome.css">
+   
+    <style>
+    body{margin:0; padding:0;}
+        video {
+            object-fit: fill;
+            width: 10%;
+        }
+        button,
+        input,
+        select {
+            font-weight: normal;
+            padding: 2px 4px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: none;
+            font-size: 16px;
+            outline: none;
+        }
+		
+		.ship{
+        	border: 1px solid;
+        }
+		.content{
+			    border: 1px solid rgb(189, 189, 189);
+		}
+		
+        .make-center {
+            text-align: center;
+            padding: 5px 10px;
+        }
+        .as{
+            list-style: none;
+                margin-bottom: 1px;
+                overflow:hidden;
+        }
+        .as li{
+            float:left;
+            margin-left: 5px;
+        }
+        .clearfix{
+            border: 1px solid #EEEDF0;  
+        }
+        .title{
+            height: 30px;
+            line-height: 30px;
+            background-color: #FAFAFA;
+            font-size: 22px;
+            padding: 10px;
+            border-bottom: 1px solid #E6E6E6;
+        }
+        .img{
+            width: 32px;
+            height: 34px;
+            margin-right: 10px;
+                
+        }
+        .portrait {
+            margin: 10px;
+            text-align: left;
+            float:left;
+        }
+        .portrait .mz {
+            color: #15A5FB;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        .information{
+            float:left;
+            margin-top: 10px;
+        }
+        .bl{
+        	float:left;
+        	margin-left: 5px;
+        }
+        .column{
+        	border: 1px solid;
+        }
+        .aa{
+        	margin: 10px;
+        }
+        .header{
+        	display: none;
+        }
+    </style>
+
+<link rel="stylesheet" href="./safari_files/layer.css" id="layui_layer_skinlayercss" style=""></head>
+
+<body>        
+        <div class="wrapper wrapper-content">
+            <div class="row">
+            	
+                 <div class="col-sm-7">
+                 	<!--<div class="make-center">
+                		 <button id="open-room" class="btn btn-primary bl">创建房间</button>
+		                <button id="join-room" class="btn btn-primary bl">加入房间</button>
+		                <button id="btn-leave-room" class="btn btn-primary bl" disabled>离开房间</button>
+		<button class="btn btn-primary gb">关闭</button>
+		               
+		            </div>-->
+            	<div class="main">
+            		   <article class="content">
+
+				        <header style="text-align: center;">
+				            <h1>远程会诊</h1>
+				
+				        </header>
+				
+				        <div class="github-stargazers"></div>
+				
+				
+				
+				        <section class="experiment">
+				            <div class="make-center">
+							<input type="hidden" style="display:none;" value="vc_159a92158b9e4c1" id="uuid">
+				                <input type="hidden" id="room-id" value="swowt9s1512722879643" disabled="">
+				                <button style="display:none;" id="open-room" disabled="">创建房间</button>
+				                <button id="join-room" disabled="">加入房间</button>
+				                <button style="display:none;" id="open-or-join-room" disabled="">自动打开或加入室</button>
+				
+				                <button id="btn-leave-room" disabled="">离开或关闭房间</button><!-- 
+				                <button id="add_open" class="btn btn-primary bl">进入房间</button> -->
+				                <div id="room-urls" style="text-align: center;display: none;background: #F1EDED;margin: 15px -10px;border: 1px solid rgb(189, 189, 189);border-left: 0;border-right: 0;"></div>
+				            </div>
+				            
+				            <div class="neirong">
+				                
+				                <div class="liaot">
+				                     <div id="chat-container">
+				                        <div class="chitchat">
+				                            <input type="text" id="input-text-chat" placeholder="输入文本聊天" disabled="">
+				                            <button id="share-file" disabled="">共享文件</button>
+				                        </div>
+				                        <div id="file-container"></div>
+				                        <div class="chat-output"></div>
+				                        
+				                    </div>
+				                </div>
+                            <div class="ship">
+				                    <div id="videos-container"><div class="media-container" id="P4iOBud0i8nmhwiWSps4cbxPLiBtJqlNwJmX" style="width: 433px;"><div class="media-controls" style="margin-left: 903px; opacity: 1;"><div class="control zoom-in"></div></div><div class="volume-control" style="margin-left: 903px; margin-top: 683px; opacity: 1;"></div><div class="media-box"><h2 style="position: absolute;color:white;font-size:17px;text-shadow: 1px 1px black;padding:0;margin:0;text-align: left; margin-top: 10px; margin-left: 10px; display: block; border: 0;line-height:1.5;z-index:1;">swowt9s1512722879643</h2><video style="max-height: 846px;"></video></div></div></div>
+				                   
+				                </div>
+				             
+				            </div>
+				            
+				        </section>
+				
+				        <script src="./safari_files/RTCMultiConnection.min.js"></script>
+				        <script src="./safari_files/socket.io.js"></script>
+				        <script type="text/javascript" src="./safari_files/layer.js"></script>
+				        <!-- custom layout for HTML5 audio/video elements -->
+				        <script src="./safari_files/getMediaElement.js"></script>
+				        <script src="./safari_files/FileBufferReader.js"></script>
+                        <script src="./safari_files/getHTMLMediaElement.js"></script> 
+						
+						
+					<!-- <script src="https://www.webrtc-experiment.com/RTCMultiConnection-v1.4.js"></script>  -->
+				        <script>
+				            // ......................................................
+				            // .......................UI Code........................
+				            // ......................................................
+				            //打开房间
+				            document.getElementById('open-room').onclick = function() {
+				                disableInputButtons();
+				                connection.open(document.getElementById('room-id').value, function() {
+				                    showRoomURL(connection.sessionid);
+				                });
+				            };
+				            //加入房间 
+				            document.getElementById('join-room').onclick = function() {
+				                disableInputButtons();
+				                connection.join(document.getElementById('room-id').value);
+								
+								//安卓 进入房间提示
+								android_function.otherSideIn();
+							    
+
+				            };
+				            //自动打开或加入室
+				            document.getElementById('open-or-join-room').onclick = function() {
+				                disableInputButtons();
+				                connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
+				                    if(!isRoomExists) {
+				                        showRoomURL(roomid);
+				                    }
+				                });
+				            };
+				            //离开或关闭房间
+				            document.getElementById('btn-leave-room').onclick = function() {
+							  // android_function.otherSideOut();
+							  // console.log('离开或关闭房间');
+							
+				                this.disabled = true;
+				
+				                if(connection.isInitiator) {
+				                    // use this method if you did NOT set "autoCloseEntireSession===true"
+				                    // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
+				                    connection.closeEntireSession(function() {
+				                        document.querySelector('h1').innerHTML = 'Entire session has been closed.';
+				                    });
+				                }
+				                else {
+				                    connection.leave();
+				                }
+				            };
+				
+				            // ......................................................
+				            // ................FileSharing/TextChat Code.............
+				            // ......................................................
+				            //发送文件 图片
+				            document.getElementById('share-file').onclick = function() {
+				                var fileSelector = new FileSelector();
+				                fileSelector.selectSingleFile(function(file) {
+				                    connection.send(file);
+				                });
+				            };
+				            //点击回车 发消息
+				            document.getElementById('input-text-chat').onkeyup = function(e) {
+				                if (e.keyCode != 13) return;
+				
+				                // removing trailing/leading whitespace
+				                this.value = connection.username+':'+this.value.replace(/^\s+|\s+$/g, '');
+				                if (!this.value.length) return;
+				
+				                connection.send(this.value);
+				
+				                appendDIV(this.value);
+				                this.value = '';
+				            };
+				            //显示自己发送的文字消息
+				            var chatContainer = document.querySelector('.chat-output');
+				
+				            function appendDIV(event) {
+				                //console.log('消息');
+				                var div = document.createElement('div');
+				                div.innerHTML = event.data || event;
+				                chatContainer.insertBefore(div, chatContainer.firstChild);// insertBefore 把一个给定的节点插入到一个给定元素节点的给定子节点前面
+				                div.tabIndex = 0;
+				                div.focus();
+				
+				                document.getElementById('input-text-chat').focus();//发完消息后，把焦点固定到输入框内
+				            }
+				
+				            // ......................................................
+				            // ..................RTCMultiConnection Code.............
+				            // ......................................................
+							
+							
+							
+							
+							
+				            //打开视频和音频代码-s
+				            var connection = new RTCMultiConnection();
+
+				            // by default, socket.io server is assumed to be deployed on your own URL
+				            connection.socketURL = '/';
+				
+				            // comment-out below line if you do not have your own socket.io server
+				            // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+				
+				            connection.socketMessageEvent = 'audio-video-file-chat-demo';
+				
+				            connection.enableFileSharing = true; // by default, it is "false".
+				
+				            connection.session = {
+				                audio: true,
+				                video: true,
+				                data: true
+				            };
+				            //打开视频和音频代码-e
+				            //接收音频和接收视频代码 -s
+				            connection.sdpConstraints.mandatory = {
+				                OfferToReceiveAudio: true,
+				                OfferToReceiveVideo: true
+				            };
+				            //接收音频和接收视频代码 -e
+				            //把获取到的视频信息，赋予id为videos-container的DIV 没有这一行视频也能加载出来，只是没在那个DIV中
+				            connection.videosContainer = document.getElementById('videos-container');
+				            //对音频流和视频流的处理，这里面的可能就是音量控制 -s
+				            connection.onstream = function(event) {
+				                event.mediaElement.removeAttribute('src');
+								event.mediaElement.removeAttribute('srcObject');
+
+								var video = document.createElement('video');
+								video.controls = true;
+								if(event.type === 'local') {
+									video.muted = true;
+								}
+								video.srcObject = event.stream;
+
+								var width = parseInt(connection.videosContainer.clientWidth / 2) - 20;
+								var name = event.userid.split("_");
+								var mediaElement = getHTMLMediaElement(video, {
+								    title: name[0],
+									//title: event.user,
+									//title: connection.username,
+									buttons: ['full-screen'],
+									width: width,
+									showOnMouseEnter: false
+								});
+									
+				                connection.videosContainer.appendChild(mediaElement);
+				
+				                setTimeout(function() {
+				                    mediaElement.media.play();
+				                }, 5000);
+								
+								mediaElement.id = event.streamid;
+								//connection.videosContainer.appendChild(mediaElement);
+								if (DetectRTC.browser.name === 'Firefox') {
+									connection.mediaConstraints = {
+										audio: true,
+										video: true
+									};
+								}
+								//Set resolutions
+								
+								connection.mediaConstraints = {
+									audio: true,
+									video: {
+										mandatory: {
+											minWidth: 800,//1280
+											maxWidth: 800,
+											minHeight: 600, //720
+											maxHeight: 600
+										},
+										optional: []
+									}
+								};
+								if (DetectRTC.browser.name === 'Firefox') {
+									connection.mediaConstraints = {
+										audio: true,
+										video: {
+											width: 800,
+											height: 600
+										}
+									};
+								}
+								
+
+								connection.mediaConstraints = {
+									video: true,
+									audio: {
+										mandatory: {
+											echoCancellation: false, // disabling audio processing
+											googAutoGainControl: true,
+											googNoiseSuppression: true,
+											googHighpassFilter: true,
+											googTypingNoiseDetection: true,
+											//googAudioMirroring: true
+										},
+										optional: []
+									}
+								};
+								
+								
+								var n = document.getElementsByClassName("media-container").length; 
+								if(ip=connection.username){
+									
+									if(n>=2){
+									    //安卓 进入房间提示
+										android_function.otherSideIn();
+								
+									}
+									
+								}
+				            };
+							
+							
+							
+							
+							
+							
+							
+				            //对音频流和视频流的处理，这里面的可能就是音量控制 -e
+				            connection.onstreamended = function(event) { 
+				                var mediaElement = document.getElementById(event.streamid);
+				                //parentNode.removeChild删除当前节点标签（parent.removeChild() 删除父节点的一个子节点）
+				                if(mediaElement) {
+				                    mediaElement.parentNode.removeChild(mediaElement);
+				                }
+				            };
+				            // 发送图片
+				            connection.onmessage = appendDIV;
+				            connection.filesContainer = document.getElementById('file-container');
+				            // 打开视频操作
+							var index = 1;
+				            connection.onopen = function() {
+								if(index>1){//jiaru
+								   console.log('加入');
+								   
+								}else{//fangzhu 
+								   console.log('打开');
+								}
+								
+							    index++;
+							
+							
+				               // console.log(22);
+				                document.getElementById('share-file').disabled = false;
+				                document.getElementById('input-text-chat').disabled = false;
+				                document.getElementById('btn-leave-room').disabled = false;
+				                //点击按钮修改 h1 的元素内容  显示你的聊天对象
+				               // document.querySelector('h1').innerHTML = '正在通讯: ' + connection.getAllParticipants().join(', ');
+				                //document.querySelector('h1').innerHTML = '正在通讯: ' + connection.username;
+							
+				            };
+				            // 关闭视频操作
+				            connection.onclose = function() {
+							
+				              
+
+				                if(connection.getAllParticipants().length) {
+								   
+								    android_function.otherSideOut();
+									 console.log('关闭视频操作111');
+				                   // document.querySelector('h1').innerHTML = '正在通讯: ' + connection.getAllParticipants().join(', ');
+				                   // document.querySelector('h1').innerHTML = '正在通讯: ' + connection.username;
+				                }
+				                else {
+									console.log('自己关闭视频操作');
+									android_function.selfOut();
+				                    document.querySelector('h1').innerHTML = '所有人已经离开';
+				                }
+				            };
+				            connection.onEntireSessionClosed = function(event) {
+				                document.getElementById('share-file').disabled = true;
+				                document.getElementById('input-text-chat').disabled = true;
+				                document.getElementById('btn-leave-room').disabled = true;
+				
+				                document.getElementById('open-or-join-room').disabled = false;
+				                document.getElementById('open-room').disabled = false;
+				                document.getElementById('join-room').disabled = false;
+				                document.getElementById('room-id').disabled = false;
+				
+				                connection.attachStreams.forEach(function(stream) {
+				                    stream.stop();
+				                });
+				
+				                // don't display alert for moderator
+				                if(connection.userid === event.userid) return;
+				                document.querySelector('h1').innerHTML = 'Entire session has been closed by the moderator: ' + event.userid;
+				            };
+				
+				            connection.onUserIdAlreadyTaken = function(useridAlreadyTaken, yourNewUserId) {
+				                // seems room is already opened
+				                connection.join(useridAlreadyTaken);
+				            };
+				
+				            function disableInputButtons() {
+				                document.getElementById('open-or-join-room').disabled = true;
+				                document.getElementById('open-room').disabled = true;
+				                document.getElementById('join-room').disabled = true;
+				                document.getElementById('room-id').disabled = true;
+				            }
+				
+				            // ......................................................
+				            // ......................Handling Room-ID................
+				            // ......................................................
+				            //显示房间 id  自己id
+				            function showRoomURL(roomid) {
+							
+							
+				                var roomHashURL = '#' + roomid;
+				                var roomQueryStringURL = '?roomid=' + roomid;
+				
+				                var html = '<h2>您房间的唯一地址:</h2><br>';
+				
+				                html += '哈希 URL: <a href="' + roomHashURL + '" target="_blank">' + roomHashURL + '</a>';
+				                html += '<br>';
+				                html += '房间 URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
+				
+				                var roomURLsDiv = document.getElementById('room-urls');
+				                roomURLsDiv.innerHTML = html;
+				
+				                roomURLsDiv.style.display = 'block';
+				            }
+				
+				            (function() {
+				                var params = {},
+				                    r = /([^&=]+)=?([^&]*)/g;
+				
+				                function d(s) {
+				                    return decodeURIComponent(s.replace(/\+/g, ' '));
+				                }
+				                var match, search = window.location.search;
+				                while (match = r.exec(search.substring(1)))
+				                    params[d(match[1])] = d(match[2]);
+				                window.params = params;
+				            })();
+				
+				            var roomid = '';
+				//            if (localStorage.getItem(connection.socketMessageEvent)) {
+				//                roomid = localStorage.getItem(connection.socketMessageEvent);
+				//            } else {
+				//                roomid = connection.token();
+				//            }
+				//            document.getElementById('room-id').value = roomid;
+				            document.getElementById('room-id').onkeyup = function() {
+				                localStorage.setItem(connection.socketMessageEvent, this.value);
+				            };
+				
+				            var hashString = location.hash.replace('#', '');
+				            if(hashString.length && hashString.indexOf('comment-') == 0) {
+				              hashString = '';
+				            }
+				
+				            //var roomid = params.roomid;
+				            if(!roomid && hashString.length) {
+				                roomid = hashString;
+				            }
+				
+				            if(roomid && roomid.length) {
+				                document.getElementById('room-id').value = roomid;
+				                localStorage.setItem(connection.socketMessageEvent, roomid);
+				
+				                // auto-join-room
+				                (function reCheckRoomPresence() {
+				                    connection.checkPresence(roomid, function(isRoomExists) {
+				                        if(isRoomExists) {
+				                            connection.join(roomid);
+				                            return;
+				                        }
+				
+				                        setTimeout(reCheckRoomPresence, 5000);
+				                    });
+				                })();
+				
+				                disableInputButtons();
+				            }
+				
+				            //
+				            /*
+				            void function () {
+				                var url = location.search; //获取url中"?"符后的字串
+				                var theRequest = new Object();
+				                if (url.indexOf("?") != -1) {
+				                    var str = url.substr(1);
+				                    strs = str.split("&");
+				                    for(var i = 0; i < strs.length; i ++) {
+				                        theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+				                    }
+				                }
+				                console.log(theRequest['ip']);
+				                var room_id = document.getElementById('room-id');
+				                room_id.value=theRequest['ip'];
+				                room_id.click();
+				            }();
+				            */
+				
+				
+				
+				        </script>
+				
+				
+				
+
+				
+				        <script>
+				       /* (function () {
+				            console.log(1111);
+				            var url = location.search; //获取url中"?"符后的字串
+				            var theRequest = new Object();
+				            if (url.indexOf("?") != -1) {
+				            var str = url.substr(1);
+				            strs = str.split("&");
+				            for(var i = 0; i < strs.length; i ++) {
+				            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+				            }
+				            }
+				            console.log(theRequest['ip']);
+				            var room_id = document.getElementById('room-id');
+				            room_id.value=theRequest['ip'];
+				            room_id.click();
+				        })
+				        ();*/
+				//
+				//       connection.session = {
+				//           audio: true,
+				//           screen: true
+				//       };
+				
+				
+				
+				
+				
+				        var foo = function () {
+				            var url = location.search; //获取url中"?"符后的字串
+				            var theRequest = new Object();
+				            if (url.indexOf("?") != -1) {
+				                var str = url.substr(1);
+				               // console.log(123);
+				               // console.log(str);
+				                var strs = str.split("&");
+				              //  console.log(strs);
+				                for(var i = 0; i < strs.length; i ++) {
+				                    theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+				                    //theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+				                }
+				            }
+				            var room_id = document.getElementById('room-id');
+				            var name_string =  theRequest['name_string'];
+				            if(theRequest['ip']){
+							//console.log('房主名字'+name_string);
+				                    //connection.username=name_string;
+									connection.userid=name_string;
+							  //房主建房间
+				                room_id.value=theRequest['ip'];
+				                roomid=theRequest['ip'];
+				                disableInputButtons();
+				                connection.open(document.getElementById('room-id').value, function() {
+				                    connection.username=name_string;
+				                    console.log('ip'+connection.username);
+				                  //  connection.userid="345";
+				                 //   showRoomURL(connection.sessionid);
+				                });
+				
+				                localStorage.setItem(connection.socketMessageEvent, this.value);
+				            }else {
+							
+							    //加入房间
+				                room_id.value=theRequest['join_ip'];
+				                roomid=theRequest['join_ip'];
+				                if (theRequest['join_ip']) {
+								    //console.log('加入名字'+name_string);
+				                    //connection.username=name_string;
+									connection.userid=name_string;
+									console.log('join_ip'+connection.username);
+				                    disableInputButtons();
+				                    connection.join(document.getElementById('room-id').value);
+									
+				                }
+								
+								
+
+				            }
+				        };
+				
+				       window.onload=function(){
+				           setTimeout(foo(),100);
+				       }
+				        </script>
+						
+				    </article>
+    
+            	</div>
+            	</div>
+            </div>
+        </div>
+        
+        	
+		 
+		
+
+
+
+
+</body><div></div></html>
